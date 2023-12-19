@@ -16,7 +16,7 @@ const TransferSearch = () => {
 
   const fetchTransferById = async (transferId) => {
     const response = await fetch(
-      `https://magic-post-7ed53u57vq-de.a.run.app/v1/transfers/${transferId}`,
+      `http://localhost:3030/v1/transfers/${transferId}`,
       {
         method: 'GET',
         headers: {

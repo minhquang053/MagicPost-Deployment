@@ -24,8 +24,6 @@ const CreateTransferForm = () => {
     toLocation: '',
   });
 
-  const locations = ['test', 'end', 'test2', 'end2', 'test3', 'end3']
-
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogMessage, setDialogMessage] = useState('');
   const [dialogTitle, setDialogTitle] = useState('');
@@ -39,6 +37,17 @@ const CreateTransferForm = () => {
     setDialogOpen(false);
   };
 
+  const handleUpdate = async () => {
+    try {
+      const response = await fetch(`http://localhost:3030/v1/locations/${formData.fromLocation}?orderId=${formData.orderId}`)
+      const data = await response.json();
+
+      setFormData((prevData) => ({ ...prevData, toLocation: data.location }));
+    } catch (err) {
+      console.error(`Failed to update location: ${err}`);
+    } 
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,7 +57,7 @@ const CreateTransferForm = () => {
     setDialogOpen(true);
 
     try {
-      const response = await fetch(`https://magic-post-7ed53u57vq-de.a.run.app/v1/transfers`, {
+      const response = await fetch(`http://localhost:3030/v1/transfers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +107,7 @@ const CreateTransferForm = () => {
       <Paper elevation={3} sx={{ padding: 2, marginTop: 4, boxShadow: 3 }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={3} alignItems="stretch">
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={10}>
               <TextField
                 label="Mã đơn hàng"
                 fullWidth
@@ -107,36 +116,32 @@ const CreateTransferForm = () => {
                 onChange={handleInputChange}
               />
             </Grid>
+            <Grid item xs={6} md={2}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleUpdate}
+              >
+                Cập nhật
+              </Button>
+            </Grid>
             <Grid item xs={12} md={6}>
               <TextField
                 label="Điểm vận chuyển"
                 fullWidth
                 name="fromLocation"
                 value={formData.fromLocation}
-                disabled
+                InputProps={{ readOnly: true }}
               />
             </Grid>
-            
-            <Grid item xs={6} md={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 label="Điểm nhận hàng"
                 fullWidth
-                select
                 name="toLocation"
                 value={formData.toLocation}
-                onChange={handleInputChange}
-                SelectProps={{
-                  MenuProps: {
-                    style: { maxHeight: 250 },
-                  }
-                }}
-              >
-                {locations.map((location) => (
-                  <MenuItem key={location} value={location}>
-                   { location }
-                  </MenuItem>
-                ))}
-              </TextField>
+                InputProps={{ readOnly: true }}
+              />
             </Grid>
           </Grid>
           <Button

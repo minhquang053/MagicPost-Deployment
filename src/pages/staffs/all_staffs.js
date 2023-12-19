@@ -10,7 +10,7 @@ import { applyPagination } from 'src/utils/apply-pagination';
 
 const fetchStaffs = async (role, location, searchTerm) => {
   const response = await fetch(
-    `https://magic-post-7ed53u57vq-de.a.run.app/v1/users?role=${role}&location=${location}&searchTerm=${searchTerm}`,
+    `http://localhost:3030/v1/users?role=${role}&location=${location}&searchTerm=${searchTerm}`,
     {
       method: 'GET',
       headers: {

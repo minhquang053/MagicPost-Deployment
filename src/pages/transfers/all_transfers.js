@@ -11,7 +11,7 @@ import { applyPagination } from 'src/utils/apply-pagination';
 
 const fetchTransfers = async (from, to, status, searchTerm) => {
   const response = await fetch(
-    `https://magic-post-7ed53u57vq-de.a.run.app/v1/transfers?from=${from}&to=${to}&status=${status}&searchTerm=${searchTerm}`,
+    `http://localhost:3030/v1/transfers?from=${from}&to=${to}&status=${status}&searchTerm=${searchTerm}`,
     {
       method: 'GET',
       headers: {

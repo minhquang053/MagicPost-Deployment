@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
 import {
   Box,
@@ -23,6 +23,12 @@ export const AccountProfileDetails = () => {
   const [email, setEmail] = useState(user?.email);
   const [phone, setPhone] = useState(user?.phone);
 
+  const vn_translate = {
+    'Manager': 'Trưởng điểm',
+    'Transactor': 'Giao dịch viên',
+    'Processor': 'Nhân viên xử lý',
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const profile = {
@@ -31,7 +37,7 @@ export const AccountProfileDetails = () => {
       'phone': phone,
     }
     const response = await fetch(
-      `https://magic-post-7ed53u57vq-de.a.run.app/v1/users/${user.userId}`,
+      `http://localhost:3030/v1/users/${user.userId}`,
       {
         method: 'PATCH',
         headers: {
@@ -128,7 +134,7 @@ export const AccountProfileDetails = () => {
                   fullWidth
                   label="Vai trò"
                   name="role"
-                  value={values.role}
+                  value={vn_translate[values.role]}
                   disabled
                 />
               </Grid>

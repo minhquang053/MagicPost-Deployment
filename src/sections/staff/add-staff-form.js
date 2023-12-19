@@ -95,7 +95,7 @@ const AddStaffForm = () => {
     setDialogOpen(true);
 
     try {
-      const response = await fetch(`https://magic-post-7ed53u57vq-de.a.run.app/v1/users`, {
+      const response = await fetch(`http://localhost:3030/v1/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -196,10 +196,9 @@ const AddStaffForm = () => {
               }}
             >
               {/* Add your role options here */}
-              <MenuItem value="Admin">Admin</MenuItem>
-              <MenuItem value="Manager">Manager</MenuItem>
-              <MenuItem value="Processor">Processor</MenuItem>
-              <MenuItem value="Shipper">Shipper</MenuItem>
+              <MenuItem value="Manager">Quản lý</MenuItem>
+              <MenuItem value="Transactor">Giao dịch viên</MenuItem>
+              <MenuItem value="Processor">Nhân viên</MenuItem>
             </TextField>
             <TextField
               select
@@ -218,7 +217,7 @@ const AddStaffForm = () => {
               }}
             >
               {/* Add your location options here */}
-              <MenuItem value="test">test</MenuItem>
+              <MenuItem value="A1">A1</MenuItem>
             </TextField>
             <TextField
               label="Mật khẩu"
