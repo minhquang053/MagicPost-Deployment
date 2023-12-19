@@ -48,7 +48,7 @@ const CreateTransferForm = () => {
     setDialogOpen(true);
 
     try {
-      const response = await fetch(`http://localhost:3030/v1/transfers`, {
+      const response = await fetch(`https://magic-post-7ed53u57vq-de.a.run.app/v1/transfers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

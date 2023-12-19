@@ -6,8 +6,6 @@
   "homepage": "https://devias.io",
   "private": false,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "next",
     "build": "next build",
     "start": "next start",

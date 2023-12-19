@@ -31,7 +31,7 @@ export const AccountProfileDetails = () => {
       'phone': phone,
     }
     const response = await fetch(
-      `http://localhost:3030/v1/users/${user.userId}`,
+      `https://magic-post-7ed53u57vq-de.a.run.app/v1/users/${user.userId}`,
       {
         method: 'PATCH',
         headers: {
