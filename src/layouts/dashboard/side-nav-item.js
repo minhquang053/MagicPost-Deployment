@@ -2,9 +2,11 @@ import { useState } from 'react';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import { Box, ButtonBase, Collapse, List, ListItem } from '@mui/material';
+import { useAuth } from 'src/hooks/use-auth';
 
 export const SideNavItem = (props) => {
-  const { active = false, disabled, external, icon, path, title, subItems } = props;
+  const { user } = useAuth();
+  const { active = false, disabled, external, icon, path, title, subItems, allowedRoles } = props;
 
   const [open, setOpen] = useState(false);
 
@@ -25,7 +27,16 @@ export const SideNavItem = (props) => {
       }
     : {};
 
-  return (
+  const shouldRenderItem = () => {
+    if (!allowedRoles || allowedRoles.length === 0) {
+      // Accessible by all roles
+      return true;
+    }
+
+    return allowedRoles.includes(user?.role);
+  }
+
+  return shouldRenderItem() ? (
     <li>
       <div>
         <ButtonBase
@@ -102,7 +113,7 @@ export const SideNavItem = (props) => {
         )}
       </div>
     </li>
-  );
+  ) : null;
 };
 
 SideNavItem.propTypes = {
@@ -113,4 +124,5 @@ SideNavItem.propTypes = {
   path: PropTypes.string,
   title: PropTypes.string.isRequired,
   subItems: PropTypes.arrayOf(PropTypes.object),
+  allowedRoles: PropTypes.arrayOf(PropTypes.string),
 };
