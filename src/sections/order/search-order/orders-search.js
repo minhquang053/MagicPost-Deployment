@@ -19,7 +19,7 @@ const OrderSearchSection = () => {
 
   const fetchOrderById = async (orderId) => {
     const response = await fetch(
-      `http://localhost:3030/v1/orders/${orderId}`,
+      `https://magic-post-7ed53u57vq-de.a.run.app/v1/orders/${orderId}`,
       {
         method: 'GET',
         headers: {

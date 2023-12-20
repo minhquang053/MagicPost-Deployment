@@ -11,7 +11,7 @@ import { applyPagination } from 'src/utils/apply-pagination';
 
 const fetchOrders = async (start, end, type, status, searchTerm) => {
   const response = await fetch(
-    `http://localhost:3030/v1/orders?start=${start}&end=${end}&type=${type}&status=${status}&searchTerm=${searchTerm}`,
+    `https://magic-post-7ed53u57vq-de.a.run.app/v1/orders?start=${start}&end=${end}&type=${type}&status=${status}&searchTerm=${searchTerm}`,
     {
       method: 'GET',
       headers: {
