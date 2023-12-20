@@ -5,7 +5,6 @@ import { Box, ButtonBase, Collapse, List, ListItem } from '@mui/material';
 import { useAuth } from 'src/hooks/use-auth';
 
 export const SideNavItem = (props) => {
-  const { user } = useAuth();
   const { active = false, disabled, external, icon, path, title, subItems, allowedRoles } = props;
 
   const [open, setOpen] = useState(false);
@@ -26,17 +25,18 @@ export const SideNavItem = (props) => {
         href: path,
       }
     : {};
+  
+  const { user } = useAuth();
 
-  const shouldRenderItem = () => {
-    if (!allowedRoles || allowedRoles.length === 0) {
-      // Accessible by all roles
+  const filteredSubItems = subItems?.filter(subItem => {
+    if (!subItem.allowedRoles || subItem.allowedRoles.length === 0) {
+      // Sub-item accessible to all roles
       return true;
     }
+    return subItem.allowedRoles.includes(user?.role);
+  });
 
-    return allowedRoles.includes(user?.role);
-  }
-
-  return shouldRenderItem() ? (
+  return (
     <li>
       <div>
         <ButtonBase
@@ -103,7 +103,7 @@ export const SideNavItem = (props) => {
         {subItems && (
           <Collapse in={open}>
             <List component="div" disablePadding>
-              {subItems.map((subItem, index) => (
+              {filteredSubItems.map((subItem, index) => (
                 <ListItem key={index}>
                   <SideNavItem {...subItem} />
                 </ListItem>
@@ -113,7 +113,7 @@ export const SideNavItem = (props) => {
         )}
       </div>
     </li>
-  ) : null;
+  );
 };
 
 SideNavItem.propTypes = {

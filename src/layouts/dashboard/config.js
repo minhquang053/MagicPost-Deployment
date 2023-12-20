@@ -14,7 +14,8 @@ export const items = [
       <SvgIcon fontSize="small">
         <ChartBarIcon />
       </SvgIcon>
-    )
+    ),
+    allowedRoles: ["Admin", "Manager"],
   },
   {
     title: 'Nhân viên',
@@ -46,17 +47,17 @@ export const items = [
       {
         title: "Tạo đơn hàng",
         path: '/orders/create_order',
-        allowedRoles: ["Manager", "Transactor"],
+        allowedRoles: ["Transactor"],
       },
       {
         title: "Xác nhận đơn hàng",
         path: '/orders/confirm_order',
-        allowedRoles: ["Manager", "Transactor"],
+        allowedRoles: ["Transactor"],
       },
       {
         title: "Giao đơn hàng",
         path: '/orders/shipping_order',
-        allowedRoles: ["Manager", "Transactor"],
+        allowedRoles: ["Transactor"],
       },
       {
         title: "Tra cứu đơn hàng",
@@ -79,10 +80,12 @@ export const items = [
       {
         title: "Tạo vận chuyển",
         path: '/transfers/create_transfer',
+        allowedRoles: ["Transactor", "Processor"],
       },
       {
         title: "Xác nhận vận chuyển",
         path: '/transfers/confirm_transfer',
+        allowedRoles: ["Transactor", "Processor"],
       },
       {
         title: "Tra cứu vận chuyển",
@@ -93,7 +96,6 @@ export const items = [
         path: '/transfers/all_transfers',
       }
     ],
-    allowedRoles: ["Manager", "Transactor", "Processor"],
   },
   {
     title: "Thống kê",
@@ -101,7 +103,8 @@ export const items = [
       <SvgIcon fontSize="small">
         <ChartPieIcon />
       </SvgIcon>
-    )
+    ),
+    allowedRoles: ["Admin", "Manager"]
   },
   {
     title: 'Tài khoản',

@@ -137,6 +137,10 @@ const AddStaffForm = () => {
           setDialogMessage('Email không hợp lệ');
         } else if (msg === 'Invalid phone number') {
           setDialogMessage('Số điện thoại không hợp lệ');
+        } else if (msg === 'This location already had a Manager') {
+          setDialogMessage('Địa điểm này đã có trưởng điểm');
+        } else if (msg === 'Account with the same email existed') {
+          setDialogMessage('Email đã được sử dụng');
         } else {
           setDialogMessage('Đã xảy ra lỗi khi thêm nhân viên.');
         }
