@@ -8,7 +8,7 @@ const AmountForm = ({ setFormData, formData, reset }) => {
 
   useEffect(() => {
     const a = parseFloat(amount) || 0;
-    if (a > 1000000) {
+    if (a >= 1000000) {
         setAmountFee(`${(a * 0.005).toFixed(2)} VND`);
     } else {
         setAmountFee('');

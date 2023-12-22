@@ -38,14 +38,42 @@ const CreateTransferForm = () => {
   };
 
   const handleUpdate = async () => {
+    setDialogTitle('');
+    setDialogMessage('Đang cập nhật điểm nhận hàng kế tiếp');
+    setDialogOpen(true);
     try {
       const response = await fetch(`https://magic-post-7ed53u57vq-de.a.run.app/v1/locations/${formData.fromLocation}?orderId=${formData.orderId}`)
       const data = await response.json();
 
-      setFormData((prevData) => ({ ...prevData, toLocation: data.location }));
+      if (response.ok) {
+        setFormData((prevData) => ({ ...prevData, toLocation: data.location }));
+        setDialogOpen(false);
+      } else {
+        const msg = data.error;
+        setDialogTitle('Thất bại');
+        if (msg === 'Missing order id') {
+          setDialogMessage('Vui lòng nhập mã đơn hàng');
+        } else if (msg === 'Order not found') {
+          setDialogMessage('Mã đơn hàng không hợp lệ');
+        } else if (msg === 'Package not available at that location') {
+          setDialogMessage('Bưu kiện không còn ở địa điểm hiện tại');
+        } else if (msg === 'Invalid location') {
+          setDialogMessage('Điểm làm việc không hợp lệ');
+        } else {
+          setDialogMessage('Đã xảy ra lỗi khi cập nhật')
+        }
+        setDialogOpen(true);
+      }
     } catch (err) {
       console.error(`Failed to update location: ${err}`);
+      setDialogTitle('Thất bại');
+      setDialogMessage('Đã xảy ra lỗi khi cập nhật');
+      setDialogOpen(true);
     } 
+
+    setTimeout(() => {
+      setDialogOpen(false);
+    }, 10000);
   }
 
   const handleSubmit = async (e) => {
@@ -83,7 +111,9 @@ const CreateTransferForm = () => {
           setDialogMessage('Đơn hàng không tồn tại!');
         } else if (msg === 'Require proper processor access') {
           setDialogMessage('Không có quyền tạo đơn vận chuyển');
-        }{
+        } else if (msg === 'Transfer matched') {
+          setDialogMessage('Đã tồn tại vận chuyển tương tự')
+        } else {
           setDialogMessage('Đã xảy ra lỗi khi tạo đơn vận chuyển');
         }
       }

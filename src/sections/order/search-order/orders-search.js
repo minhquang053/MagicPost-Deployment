@@ -30,6 +30,10 @@ const OrderSearchSection = () => {
   }
 
   const fetchOrderById = async (orderId) => {
+    if (!orderId) {
+      return null
+    }
+
     const response = await fetch(
       `https://magic-post-7ed53u57vq-de.a.run.app/v1/orders/${orderId}`,
       {
@@ -41,7 +45,16 @@ const OrderSearchSection = () => {
       }
     );
     const data = await response.json();
-    return data;
+    
+    if (response.ok) {
+      return data;
+    } else {
+      setDialogTitle('Thất bại');
+      setDialogMessage("Đơn hàng không tồn tại")
+      setDialogOpen(true);
+      
+      return null;
+    }
   };
 
   const handleSearch = async () => {
@@ -159,6 +172,14 @@ const OrderSearchSection = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant="h6" color="textSecondary" gutterBottom>
+                Giá trị thực của bưu gửi
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Giá trị: {order.amount} 
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" color="textSecondary" gutterBottom>
                 Khối lượng (kg)
               </Typography>
               <Typography variant="body2" color="textSecondary">
@@ -166,6 +187,17 @@ const OrderSearchSection = () => {
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 Khối lượng quy đổi: {order.weightInfo.exchanged}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" color="textSecondary" gutterBottom>
+                Kích cỡ bưu gửi
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Dài - Rộng - Cao
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {order.sizeInfo.length} x {order.sizeInfo.width} x {order.sizeInfo.height} (cm)
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
