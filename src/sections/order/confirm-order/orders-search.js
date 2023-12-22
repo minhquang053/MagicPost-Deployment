@@ -94,20 +94,27 @@ const OrderSearchSection = () => {
           })
         }
       );
+      const data = await response.json();
 
       if (response.ok) {
-        const updatedOrder = await response.json();
-        setOrder(updatedOrder);
+        setOrder(data);
         setOrderId('');
         console.log('Order updated successfully');
         setDialogTitle('Thành công');
         setDialogMessage('Xác nhận đơn hàng thành công!');
       } else {
-        // Handle the case where the update fails
-        const msg = (await response.json()).error;
+        const msg = data.error;
         console.error(`Failed to update order: ${msg}`);
         setDialogTitle('Thất bại');
-        setDialogMessage('Đã xảy ra lỗi khi xác nhận.');
+        if (msg === 'Not shipped') {
+          setDialogMessage('Đơn hàng chưa được giao');
+        } else if (msg === 'Permission required') {
+          setDialogMessage('Không có quyền xác nhận');
+        } else if (msg === 'Order not found') {
+          setDialogMessage('Đơn hàng không tồn tại');
+        } else {
+          setDialogMessage('Đã xảy ra lỗi khi xác nhận');
+        }
       }
     } catch (error) {
       console.error('Failed to update order:', error);
@@ -139,20 +146,28 @@ const OrderSearchSection = () => {
           })
         }
       );
+      const data = await response.json();
 
       if (response.ok) {
-        const updatedOrder = await response.json();
-        setOrder(updatedOrder);
+        setOrder(data);
         setOrderId('');
         console.log('Order updated successfully');
         setDialogTitle('Thành công');
         setDialogMessage('Xác nhận đơn hàng thành công!');
       } else {
         // Handle the case where the update fails
-        const msg = (await response.json()).error;
+        const msg = data.error;
         console.error(`Failed to update order: ${msg}`);
         setDialogTitle('Thất bại');
-        setDialogMessage('Đã xảy ra lỗi khi xác nhận.');
+        if (msg === 'Not shipped') {
+          setDialogMessage('Đơn hàng chưa được giao');
+        } else if (msg === 'Permission required') {
+          setDialogMessage('Không có quyền xác nhận');
+        } else if (msg === 'Order not found') {
+          setDialogMessage('Đơn hàng không tồn tại');
+        } else {
+          setDialogMessage('Đã xảy ra lỗi khi xác nhận');
+        }
       }
     } catch (error) {
       console.error('Failed to update order:', error);

@@ -238,13 +238,7 @@ const OrderSearchSection = () => {
             </Grid>
           </Grid>
         </Paper>
-      )}
-
-      {!order && orderId && (
-        <Typography variant="body2" color="textSecondary">
-          Loading...
-        </Typography>
-      )}
+      )} 
     </Box>
   );
 };

@@ -46,7 +46,7 @@ const CreateTransferForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setFormData((prevData) => ({ ...prevData, toLocation: data.location }));
+        setFormData((prevData) => ({ ...prevData, toLocation: data?.location }));
         setDialogOpen(false);
       } else {
         const msg = data.error;
@@ -93,6 +93,7 @@ const CreateTransferForm = () => {
         },
         body: JSON.stringify(formData),
       });
+      const data = await response.json();
 
       // Check if the request was successful (you may need to adjust based on your API response structure)
       if (response.ok) {
@@ -103,9 +104,9 @@ const CreateTransferForm = () => {
           toLocation: '',
         });
         setDialogTitle('Thành công');
-        setDialogMessage('Đơn vận chuyển đã được tạo thành công!');
+        setDialogMessage(`Mã vận chuyển: ${data?.transferId}`);
       } else {
-        const msg = (await response.json()).error;
+        const msg = data.error;
         setDialogTitle('Thất bại');
         if (msg === 'Order not found') {
           setDialogMessage('Đơn hàng không tồn tại!');

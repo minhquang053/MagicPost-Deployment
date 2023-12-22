@@ -107,13 +107,7 @@ const TransferSearch = () => {
             </Grid>
           </Grid>
         </Paper>
-      )}
-
-      {!transfer && transferId && (
-        <Typography variant="body2" color="textSecondary">
-          Loading...
-        </Typography>
-      )}
+      )} 
     </Box>
   );
 };
