@@ -82,7 +82,7 @@ export const AuthProvider = (props) => {
 
       if (isAuthenticated) {
         const decodedToken = jwt.decode(token)
-        const response = await fetch(`https://magic-post-7ed53u57vq-de.a.run.app/v1/users/${decodedToken.sub}`, {
+        const response = await fetch(`http://localhost:3030/v1/users/${decodedToken.sub}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export const AuthProvider = (props) => {
 
   const signIn = async (email, password) => {
     try {
-      const response = await fetch('https://magic-post-7ed53u57vq-de.a.run.app/v1/login', {
+      const response = await fetch('http://localhost:3030/v1/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

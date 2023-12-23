@@ -14,7 +14,7 @@ import { OverviewOngoingOrders } from 'src/sections/overview/overview-ongoing-or
 
 const fetchStats = async (location) => {
   const response = await fetch(
-    `https://magic-post-7ed53u57vq-de.a.run.app/v1/stats?loc=${location}`,
+    `http://localhost:3030/v1/stats?loc=${location}`,
     {
       method: 'GET',
       headers: {
@@ -157,24 +157,26 @@ const Page = () => {
                 transform={selectedLocation.includes('E')}
               />
             </Grid>
-            <Grid
-              xs={12}
-              sm={6}
-              lg={user?.role === 'Transactor'? 4:3}
-            >
-              <OverviewFailedOrders
-                difference={16}
-                positive={false}
-                sx={{ height: '100%' }}
-                value={`${selectedLocation.includes('E')?stats?.ongoing || 0:stats?.failed || 0}`}
-                transform={selectedLocation.includes('E')}
-              />
-            </Grid>
-            { user?.role === 'Transactor' && (
+            { !selectedLocation.includes('E') && (
               <Grid
                 xs={12}
                 sm={6}
-                lg={4}
+                lg={user?.role === 'Transactor'? 4:3}
+              >
+                <OverviewFailedOrders
+                  difference={16}
+                  positive={false}
+                  sx={{ height: '100%' }}
+                  value={`${selectedLocation.includes('E')?stats?.ongoing || 0:stats?.failed || 0}`}
+                  transform={selectedLocation.includes('E')}
+                />
+              </Grid>
+            )}
+            { (user?.role === 'Transactor' || selectedLocation.includes('E')) && (
+              <Grid
+                xs={12}
+                sm={6}
+                lg={user?.role === 'Transactor'? 4:3}
               >
                 <OverviewOngoingOrders
                   difference={12}

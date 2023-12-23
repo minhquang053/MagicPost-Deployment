@@ -12,7 +12,7 @@ import { useAuth } from 'src/hooks/use-auth';
 
 const fetchOrders = async (start, end, type, status, searchTerm) => {
   const response = await fetch(
-    `https://magic-post-7ed53u57vq-de.a.run.app/v1/orders?start=${start}&end=${end}&type=${type}&status=${status}&searchTerm=${searchTerm}`,
+    `http://localhost:3030/v1/orders?start=${start}&end=${end}&type=${type}&status=${status}&searchTerm=${searchTerm}`,
     {
       method: 'GET',
       headers: {

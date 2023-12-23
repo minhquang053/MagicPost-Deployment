@@ -47,7 +47,7 @@ const RecipientInformationForm = ({ setFormData, formData, reset }) => {
 
   const fetchLocationByProvince = async (province) => {
     try {
-      const response = await fetch(`https://magic-post-7ed53u57vq-de.a.run.app/v1/locations?province=${province}`);
+      const response = await fetch(`http://localhost:3030/v1/locations?province=${province}`);
       const data = await response.json();
 
       setFormData({

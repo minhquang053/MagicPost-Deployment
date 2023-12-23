@@ -55,7 +55,7 @@ const CreateOrderForm = () => {
     setDialogOpen(true);
 
     try {
-      const response = await fetch('https://magic-post-7ed53u57vq-de.a.run.app/v1/orders', {
+      const response = await fetch('http://localhost:3030/v1/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
