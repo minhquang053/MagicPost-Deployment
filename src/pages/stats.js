@@ -13,7 +13,7 @@ import { OverviewOngoingOrders } from 'src/sections/overview/overview-ongoing-or
 
 const fetchStats = async (location) => {
   const response = await fetch(
-    `http://localhost:3030/v1/stats?loc=${location}`,
+    `https://magic-post-7ed53u57vq-de.a.run.app/v1/stats?loc=${location}`,
     {
       method: 'GET',
       headers: {
