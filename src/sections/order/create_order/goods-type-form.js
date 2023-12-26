@@ -11,7 +11,7 @@ const GoodsTypeForm = ({ setFormData, goodsType }) => {
   return (
     <>
       <Typography variant="h6" sx={{ marginBottom: 2 }}>
-        Loại hàng hóa
+        Loại hàng gửi
       </Typography>
       <RadioGroup row value={goodsType} onChange={handleRadioChange} name="goodsType">
         <FormControlLabel
