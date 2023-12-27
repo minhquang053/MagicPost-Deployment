@@ -82,7 +82,7 @@ export async function makeDeliveryReceipt(order) {
                         width: '70%',
                     },
                     {
-                        qr: 'https://google.com/', fit: '90' ,
+                        qr: `https://magic-post-uet.vercel.app/info?orderId=${order.orderId}`, fit: '90' ,
                         width: '30%',
                         alignment: 'right',
                         margin: [0, -20, 17, 0], 
