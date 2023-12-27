@@ -85,14 +85,14 @@ export async function makeDeliveryReceipt(order) {
                         qr: `https://magicpost.online/info?orderId=${order.orderId}`, fit: '90' ,
                         width: '30%',
                         alignment: 'right',
-                        margin: [0, -20, 17, 0], 
+                        margin: [0, -20, 15, 0], 
                     },
                 ],
             },
             {
                 text: `${order.orderId}\n\n`,
                 alignment: 'right',
-                margin: [0, -8, 20, 0],
+                margin: [0, 2, 20, 0],
             },
             {
                 table: {
