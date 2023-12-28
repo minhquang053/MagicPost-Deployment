@@ -69,7 +69,7 @@ const Page = () => {
     fetchData();
   }, [selectedLocation])
 
-  return (
+  return user?.role && user.role !== 'Processor' && (
     <>
       <Head>
         <title>
