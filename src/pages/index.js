@@ -58,10 +58,14 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if (user?.role !== "Admin") {
-      setSelectedLocation(user?.location);
+    if (user?.role === 'Processor') {
+      window.location.href = '/transfers/all_transfers';
     } else {
-      setSelectedLocation('');
+      if (user?.role !== "Admin") {
+        setSelectedLocation(user?.location);
+      } else {
+        setSelectedLocation('');
+      }
     }
   }, []);
 
