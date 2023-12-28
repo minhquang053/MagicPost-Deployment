@@ -13,14 +13,20 @@ import {
   CardHeader,
   Divider,
   Stack,
-  TextField
+  TextField,
+  InputAdornment,
+  IconButton,
 } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useAuth } from 'src/hooks/use-auth';
 
 export const SettingsPassword = () => {
   const { user } = useAuth(); 
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogMessage, setDialogMessage] = useState('');
@@ -99,23 +105,48 @@ export const SettingsPassword = () => {
                 fullWidth
                 label="Mật khẩu cũ"
                 name="oldPassword"
+                type={showOldPassword ? 'text' : 'password'}
                 onChange={(e) => setOldPassword(e.target.value)}
-                type="password"
                 value={oldPassword}
-              />
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowOldPassword(!showOldPassword)}
+                        edge="end"
+                      >
+                        {showOldPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}      
+            />
               <TextField
                 fullWidth
                 label="Mật khẩu mới"
                 name="newPassword"
                 onChange={(e) => setNewPassword(e.target.value)}
-                type="password"
+                type={showNewPassword ? 'text' : 'password'}
                 value={newPassword}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        edge="end"
+                      >
+                        {showNewPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}    
               />
             </Stack>
           </CardContent>
           <Divider />
           <CardActions sx={{ justifyContent: 'flex-end' }}>
-            <Button variant="contained" type="submit">
+            <Button variant="contained" 
+            type="submit">
               Cập nhật
             </Button>
           </CardActions>
